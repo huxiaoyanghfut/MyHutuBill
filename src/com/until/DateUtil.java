@@ -4,7 +4,7 @@ package com.until;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DataUtil {
+public class DateUtil {
     static long millisecondsOfOneDay = 1000*60*60*24;
 
     public static java.sql.Date util2sql(java.util.Date d){
@@ -84,7 +84,7 @@ public class DataUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(DataUtil.monthEnd());
+        System.out.println(DateUtil.monthEnd());
 
     }
 }

@@ -1,6 +1,7 @@
 package com.gui.panel;
 
 
+import com.gui.listener.ConfigListener;
 import com.until.ColorUtil;
 import com.until.GUIUtil;
 
@@ -48,8 +49,16 @@ public class ConfigPanel extends JPanel {
 
         pSubmit.add(bSubmit);
         this.add(pSubmit,BorderLayout.CENTER);
+        //添加监听器
+        addListener();
 
     }
+
+    private void addListener() {
+        ConfigListener l =new ConfigListener();
+        bSubmit.addActionListener(l);
+    }
+
     //测试
     public static void main(String[] args) {
         GUIUtil.showPanel(ConfigPanel.instance);
