@@ -5,7 +5,6 @@ import com.service.CategoryService;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryTableModel implements TableModel {

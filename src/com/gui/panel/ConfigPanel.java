@@ -2,6 +2,7 @@ package com.gui.panel;
 
 
 import com.gui.listener.ConfigListener;
+import com.service.ConfigService;
 import com.until.ColorUtil;
 import com.until.GUIUtil;
 
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
 
 
 
-public class ConfigPanel extends JPanel {
+public class ConfigPanel extends WorkingPanel {
     static{
         GUIUtil.useLNF();
     }
@@ -54,7 +55,18 @@ public class ConfigPanel extends JPanel {
 
     }
 
-    private void addListener() {
+    @Override
+    public void updateData() {
+        String budget = new ConfigService().get(ConfigService.budget);
+        String mysqlPath = new ConfigService().get(ConfigService.mysqlPath);
+        tfBudget.setText(budget);
+        tfMysqlPath.setText(mysqlPath);
+        tfBudget.grabFocus();
+//        tfBudget.requestFocusInWindow();
+    }
+
+    @Override
+    public void addListener() {
         ConfigListener l =new ConfigListener();
         bSubmit.addActionListener(l);
     }

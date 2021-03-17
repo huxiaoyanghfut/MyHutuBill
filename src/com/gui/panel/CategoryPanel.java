@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class CategoryPanel extends JPanel{
+public class CategoryPanel extends WorkingPanel{
     static{
         GUIUtil.useLNF();
     }
@@ -43,7 +43,7 @@ public class CategoryPanel extends JPanel{
         addListener();
     }
 
-    private void addListener() {
+    public void addListener() {
         CategoryListener listener = new CategoryListener();
         bAdd.addActionListener(listener);
         bEdit.addActionListener(listener);

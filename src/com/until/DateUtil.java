@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class DateUtil {
     static long millisecondsOfOneDay = 1000*60*60*24;
-
     public static java.sql.Date util2sql(java.util.Date d){
         return  new java.sql.Date(d.getTime());
     }
