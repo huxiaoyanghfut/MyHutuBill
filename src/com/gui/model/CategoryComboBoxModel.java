@@ -1,40 +1,44 @@
 package com.gui.model;
 
+import com.entity.Category;
+import com.service.CategoryService;
+
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
-import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryComboBoxModel implements ComboBoxModel<String> {
-    public List<String> cs = new ArrayList<>();
+public class CategoryComboBoxModel implements ComboBoxModel<Category> {
+    public List<Category> cs = new CategoryService().list();
 
-    String c;
+    public Category c;
     public CategoryComboBoxModel(){
-        cs.add("餐饮");
-        cs.add("交通");
-        cs.add("住宿");
-        cs.add("话费");
+        if(!cs.isEmpty())
         c = cs.get(0);
+
     }
 
     @Override
     public void setSelectedItem(Object anItem) {
-
+        c = (Category) anItem;
     }
 
     @Override
     public Object getSelectedItem() {
-        return null;
+        if(!cs.isEmpty()){
+            return c;
+        }else{
+            return null;
+        }
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return cs.size();
     }
 
     @Override
-    public String getElementAt(int index) {
-        return null;
+    public Category getElementAt(int index) {
+        return cs.get(index);
     }
 
     @Override

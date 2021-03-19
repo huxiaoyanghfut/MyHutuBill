@@ -42,7 +42,7 @@ public class RecordDAO {
     public void add(Record record) {
 
         String sql = "insert into record values(null,?,?,?,?)";
-        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);) {
+        try (Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, record.spend);
             ps.setInt(2, record.cid);
             ps.setString(3, record.comment);

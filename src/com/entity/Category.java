@@ -29,4 +29,9 @@ public class Category {
     public void setRecordNumber(int recordNumber) {
         this.recordNumber = recordNumber;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

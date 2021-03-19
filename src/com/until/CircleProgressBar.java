@@ -91,7 +91,7 @@ public class CircleProgressBar extends JPanel {
         this.repaint();
     }
 
-    public Color getForegroundColor() {
+    public Color getForegroundColor(Color byPercentage) {
         return foregroundColor;
     }
 

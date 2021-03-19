@@ -1,6 +1,9 @@
 package com.gui.panel;
 
+import com.entity.Category;
+import com.gui.listener.RecordListener;
 import com.gui.model.CategoryComboBoxModel;
+import com.service.CategoryService;
 import com.until.ColorUtil;
 import com.until.GUIUtil;
 import org.jdesktop.swingx.JXDatePicker;
@@ -9,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class RecordPanel extends JPanel{
+public class RecordPanel extends WorkingPanel{
     static{
         GUIUtil.useLNF();
     }
@@ -23,7 +26,7 @@ public class RecordPanel extends JPanel{
     //消费记录输入框
     public JTextField tfSpend = new JTextField("0");
     public CategoryComboBoxModel cbModel = new CategoryComboBoxModel();
-    public JComboBox<String> cbCategory = new JComboBox<>(cbModel);
+    public JComboBox<Category> cbCategory = new JComboBox<>(cbModel);
     public JTextField tfComment =new JTextField();
     public JXDatePicker datePicker = new JXDatePicker(new Date());
 
@@ -44,15 +47,43 @@ public class RecordPanel extends JPanel{
         pInput.add(lDate);
         pInput.add(datePicker);
 
-        pSubmit.add(datePicker);
+        pSubmit.add(bSubmit);
 
         this.setLayout(new BorderLayout());
         this.add(pInput, BorderLayout.NORTH);
-        this.add(pSubmit, BorderLayout.CENTER);
+        this.add(pSubmit, BorderLayout.SOUTH);
+        addListener();
     }
 
     public static void main(String[] args) {
         GUIUtil.showPanel(RecordPanel.instance);
     }
 
+    public Category getSelectedCategory() {
+        return (Category) cbCategory.getSelectedItem();
+    }
+
+    @Override
+    public void updateData() {
+        cbModel.cs = new CategoryService().list();
+        //更新面板
+        cbCategory.updateUI();
+        resetInput();
+        tfSpend.grabFocus();
+    }
+
+    private void resetInput() {
+        tfSpend.setText("0");
+        tfComment.setText("");
+        if(0!=cbModel.cs.size())
+            cbCategory.setSelectedIndex(0);
+        datePicker.setDate(new Date());
+    }
+
+    @Override
+    public void addListener() {
+        RecordListener recordListener = new RecordListener();
+        bSubmit.addActionListener(recordListener);
+
+    }
 }

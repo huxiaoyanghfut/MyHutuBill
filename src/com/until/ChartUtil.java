@@ -1,8 +1,9 @@
 package com.until;
-
+import com.entity.Record;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -11,8 +12,26 @@ import javax.swing.JPanel;
 
 import com.objectplanet.chart.BarChart;
 import com.objectplanet.chart.Chart;
+import com.service.ReportService;
 
 public class ChartUtil {
+    public static String[] sampleLabels(List<Record> rs){
+        String[] sampleLabels = new String[30];
+        for (int i = 0; i < sampleLabels.length; i++) {
+            if (0 == i % 5)
+                sampleLabels[i] = i + 1 + "日";
+        }
+        return sampleLabels;
+    }
+    private static double[] sampleValues(List<Record> rs) {
+
+        double[] result = new double[rs.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (int) (rs.get(i).getSpend());
+        }
+        return result;
+
+    }
 
     public static int max(double[] sampleValues) {
         int max = 0;
@@ -34,11 +53,11 @@ public class ChartUtil {
         return sampleLabels;
     }
 
-    public static Image getImage(int width, int height) {
+    public static Image getImage(List<Record> rs, int width, int height) {
         // 模拟样本数据
-        double[] sampleValues = sampleValues();
+        double[] sampleValues = sampleValues(rs);
         // 下方显示的文字
-        String[] sampleLabels = sampleLabels();
+        String[] sampleLabels = sampleLabels(rs);
         // 样本中的最大值
         int max = max(sampleValues);
 
@@ -99,7 +118,8 @@ public class ChartUtil {
     public static void main(String[] args) {
         JPanel p = new JPanel();
         JLabel l = new JLabel();
-        Image img = ChartUtil.getImage(600, 400);
+        List<Record> rs = new ReportService().listThisMonthRecords();
+        Image img = ChartUtil.getImage(rs,400, 300);
         Icon icon = new ImageIcon(img);
         l.setIcon(icon);
         p.add(l);
