@@ -7,10 +7,12 @@ import java.awt.*;
 import java.io.File;
 
 public class GUIUtil {
-    private static String imageFolder = "D:\\coding\\javaProjects\\Projects\\MyHutuBill\\img";
+    private static String imageFolder = "src/img";
+
     //设置按钮图标
     public static void setImageIcon(JButton b, String fileName, String tip){
-        ImageIcon i = new ImageIcon(new File(imageFolder,fileName).getAbsolutePath());
+
+        ImageIcon i = new ImageIcon(new File(imageFolder,fileName).getPath());
         b.setIcon(i);
         b.setPreferredSize(new Dimension(61, 81));
         b.setToolTipText(tip);
